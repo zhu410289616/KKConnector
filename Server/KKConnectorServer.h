@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 主动向 Client 端推送数据，不保证可以送达，Server 端也不会收到任何回复
 - (void)pushWithAppID:(unsigned int)appID header:(NSString *)header body:(nullable id)body;
 
+- (void)sendFrameOfType:(uint32_t)type tag:(uint32_t)tag withPayload:(NSData *)data;
+
 @end
 
 NS_ASSUME_NONNULL_END

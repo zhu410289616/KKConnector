@@ -195,4 +195,17 @@
     [self sendData:request appID:appID tag:KKConnectorTagForPush];
 }
 
+- (void)sendFrameOfType:(uint32_t)type tag:(uint32_t)tag withPayload:(NSData *)data {
+    if (!self.peerChannel_) {
+        return;
+    }
+    
+    dispatch_data_t payload = [data createReferencingDispatchData];
+    [self.peerChannel_ sendFrameOfType:type tag:tag withPayload:payload callback:^(NSError *error) {
+        if (error) {
+            NSLog(@"[KKConnectorServer][E] type: %@, tag: %@, send data failed: %@", @(type), @(tag), error);
+        }
+    }];
+}
+
 @end
